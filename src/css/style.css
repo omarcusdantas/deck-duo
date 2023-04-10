@@ -45,6 +45,11 @@ h4 {
     font-weight: 500;
 }
 
+img {
+    width: 120px;
+    border-radius: 10px;
+}
+
 header {
     width: 100%;
     margin: 40px 0;
@@ -86,10 +91,6 @@ header {
     gap: 35px;
     justify-content: center;
     box-shadow: -8px 8px 18px -6px rgba(63,54,110,0.77);
-}
-
-.cards-container>li>img {
-    border-radius: 10px;
 }
 
 .card {

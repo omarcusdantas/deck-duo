@@ -1,0 +1,86 @@
+@media (min-width: 1921px) {
+    .stopwatch {
+        right: 22.5%;
+    }
+}
+
+@media (max-width: 1440px) {
+    h1 {
+        font-size: 7rem;
+    }
+
+    h4 {
+        font-size: 3rem;
+    }
+
+    img {
+        width: 85px;
+    }
+
+    .stopwatch {
+        top: -55px;
+    }
+}
+
+@media (max-width: 768px) {
+    .stopwatch {
+        right: 7.5%;
+    }
+    
+    .cards-container {
+        width: 85%;
+        padding: 20px;
+        gap: 20px;
+    }
+
+    .card-number {
+        width: 75px;
+        height: 105px;
+        font-size: 3.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    body {
+        padding-top: 60px;
+    }
+
+    h1 {
+        margin-right: 80px;
+        font-size: 5rem;
+    }
+
+    h2, h3, h4 {
+        font-size: 2rem;
+    }
+
+    h2:first-child {
+        font-size: 3.5rem;
+    }
+
+    header {
+        margin-bottom: 5px;
+        margin-top: 0;
+    }
+
+    img {
+        width: 60px;
+    }
+
+    .stopwatch {
+        top: -45px;
+    }
+
+    .cards-container {
+        padding: 10px;
+        gap: 10px;
+    }
+
+    .card-number, .instruction {
+        font-size: 3rem;
+    }
+
+    .limit-cards {
+        display: none;
+    }
+}
