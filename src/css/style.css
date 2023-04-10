@@ -1,0 +1,152 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&display=swap");
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+    min-height: 100%;
+}
+
+body {
+    font-family: "Roboto", sans-serif;
+    background: #03003A;
+    background: linear-gradient(180deg, #03003A 25%, #60608B 63%, #419AAC 99%);
+}
+
+h1 {
+    color: #FFFFFF;
+    font-size: 9rem;
+    font-weight: 700;   
+}
+
+h2 {
+    font-size: 4rem;
+    font-weight: 500;
+    color: rgba(172,157,249,1);
+    margin: 50px;
+}
+
+h2:first-child {
+    font-size: 6rem;
+    color: white;
+}
+
+h3 {
+    font-size: 4rem;
+    font-weight: 400;
+    color: rgba(167,167,167,1);
+}
+
+h4 {
+    color: #03003A;
+    font-size: 4rem;
+    font-weight: 500;
+}
+
+header {
+    width: 100%;
+    margin: 40px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.game-container {
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.stopwatch {
+    background-color: #C4BCEE;
+    padding: 15px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    border-bottom: none;
+    position: absolute;
+    top: -63px;
+    right: 12.5%;
+}
+
+
+.cards-container {
+    width: 75%;
+    max-width: 1440px;
+    padding: 35px;
+    background: rgba(135,115,235,1);
+    background: radial-gradient(circle, rgba(172,157,249,1) 33%, rgba(135,115,235,1) 69%);
+    border: 7px solid #C4BCEE;
+    border-radius: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 35px;
+    justify-content: center;
+    box-shadow: -8px 8px 18px -6px rgba(63,54,110,0.77);
+}
+
+.cards-container>li>img {
+    border-radius: 10px;
+}
+
+.card {
+    transform-style: preserve-3d;
+    transform: scale(1);
+    filter: drop-shadow(-5px 5px 5px rgba(0, 0, 0, .3));
+}
+
+.card:active {
+    transform: scale(0.97);
+    transition: transform .2s;
+}
+
+.instruction {
+    width: 100%;
+    font-size: 5rem;
+    text-align: center;
+    color: #03003A;
+    font-weight: 500;
+    margin: 10px;
+}
+
+.card-number {
+    width: 85px;
+    height: 120px;
+    font-size: 4.5rem;
+    font-weight: 500;
+    color: #03003A;
+    background: rgb(255,255,255);
+    background: linear-gradient(180deg, rgba(255,255,255,1) 25%, rgba(217,217,217,1) 63%, rgba(167,167,167,1) 99%);
+    border: 4px solid #03003A;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform-style: preserve-3d;
+    transform: scale(1);
+    filter: drop-shadow(-5px 5px 5px rgba(0, 0, 0, .3));
+    user-select: none;
+}
+
+.card-number:active {
+    transform: scale(0.97);
+    transition: transform .2s;
+}
+
+.end-game {
+    text-align: center;
+    position: absolute;
+    top: 50px;
+    display: none;
+}
+
+.restart {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
