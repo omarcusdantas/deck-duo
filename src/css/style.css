@@ -45,11 +45,6 @@ h4 {
     font-weight: 500;
 }
 
-img {
-    width: 120px;
-    border-radius: 10px;
-}
-
 header {
     width: 100%;
     margin: 40px 0;
@@ -91,17 +86,39 @@ header {
     gap: 35px;
     justify-content: center;
     box-shadow: -8px 8px 18px -6px rgba(63,54,110,0.77);
+    perspective: 1000px;
 }
 
 .card {
+    width: 120px;
+    height: 185px;
+    position: relative;
     transform-style: preserve-3d;
+    transition: transform 0.5s;
     transform: scale(1);
-    filter: drop-shadow(-5px 5px 5px rgba(0, 0, 0, .3));
 }
 
 .card:active {
     transform: scale(0.97);
     transition: transform .2s;
+}
+
+.front-face,
+.back-face {
+    width: 120px;
+    height: 185px;
+    position: absolute;
+    top: 0;
+    backface-visibility: hidden;
+    border-radius: 10px;
+}
+
+.front-face {
+    border: 2px solid #2F2853;
+}
+
+.flip, .front-face {
+  transform: rotateY(180deg);
 }
 
 .instruction {
@@ -130,6 +147,7 @@ header {
     transform: scale(1);
     filter: drop-shadow(-5px 5px 5px rgba(0, 0, 0, .3));
     user-select: none;
+    transition: transform .5s;
 }
 
 .card-number:active {
@@ -151,3 +169,18 @@ header {
     gap: 30px;
 }
 
+.flip-number {
+    animation-name: rotate;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+    animation-iteration-count: 4;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotateY(0deg);
+    }
+    to {
+        transform: rotateY(360deg);
+    }
+}
