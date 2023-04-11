@@ -1,13 +1,15 @@
 let pointsNeeded, turns, points, seconds, minutes, secondsDisplay, minutesDisplay, intervalId;
 let firstCard = '', secondCard = '';
+const cardsContainer = document.querySelector('.cards-container');
 
-const numberCards = document.querySelectorAll('.card-number');
+let numberCards = cardsContainer.querySelectorAll('.card-number')
 numberCards.forEach(card => card.addEventListener('click', startGame));
+document.querySelector("#restart-buttom").addEventListener('click', restart);
+document.querySelector("#cancel-buttom").addEventListener('click', cancel);
 
 function startGame() {
     turns = points = 0;
     this.classList.toggle('flip-number');
-    numberCards.forEach(card => card.removeEventListener('click', startGame));
 
     const numberPairs = parseInt(this.innerHTML)/2;
     pointsNeeded = numberPairs;
@@ -41,8 +43,7 @@ function randomShuffle() {
 }
 
 function renderCards(listCards) {
-    const cardImages = listCards.map(card => card.image)
-    const cardsContainer = document.querySelector(".cards-container");
+    const cardImages = listCards.map(card => card.image);
     cardsContainer.innerHTML='';
 
     for (let i = 0; i < cardImages.length; i++) {
@@ -75,10 +76,6 @@ function updateCounter() {
     document.querySelector("h4").innerText = `${minutesDisplay}:${secondsDisplay}`;
 }
 
-function flipCard(card) {
-    card.classList.toggle('flip');
-}
-
 function manageGame() {  
     if (firstCard !== '' && secondCard !== '') {
         return;
@@ -95,7 +92,11 @@ function manageGame() {
     flipCard(this);
     secondCard = this;
     turns++;
-    setTimeout(compareCards, 1000);
+    compareCards();
+}
+
+function flipCard(card) {
+    card.classList.toggle('flip');
 }
 
 function compareCards() {
@@ -104,7 +105,10 @@ function compareCards() {
         managePoints();
         return;
     }
-  
+    setTimeout(resetCards, 1000);
+}
+
+function resetCards() {
     flipCard(firstCard);
     flipCard(secondCard);
     firstCard = secondCard = '';
@@ -115,17 +119,33 @@ function managePoints() {
 
     if (points === pointsNeeded) {
         clearInterval(intervalId);
-        document.querySelector("#result").innerText = `You finished in ${turns} turns and ${minutesDisplay}:${secondsDisplay}`;
-        document.querySelector("#restart-buttom").addEventListener('click', restart);
-        document.querySelector("#cancel-buttom").addEventListener('click', cancel);
-        document.querySelector(".cards-container").classList.add('hide');
-        document.querySelector(".counter").classList.add('hide');
-        document.querySelector(".end-game").classList.remove('hide');
+        setTimeout(gameCompleted, 1000);
     }
 }
 
+function gameCompleted() {
+    let congratulationsMessage = document.querySelector("#result");
+    if (minutes === 0) {
+        congratulationsMessage.innerText = `You finished in ${seconds} seconds, with ${turns} turns. Well done!`;
+        changeScreen();
+        return;
+    }
+    else if (minutes === 1) {
+        congratulationsMessage.innerText = `You finished in 1 minute and ${seconds} seconds, with ${turns} turns. Well done!`;
+        changeScreen();
+        return;
+    }
+    congratulationsMessage.innerText = `You finished in ${minutes} minutes and ${seconds} seconds, with ${turns} turns. Well done!`;
+    changeScreen();
+}
+
+function changeScreen() {
+    document.querySelector(".counter").classList.toggle('hide');
+    document.querySelector(".end-game").classList.toggle('hide');
+    cardsContainer.classList.toggle('hide');
+}
+
 function restart() {
-    const cardsContainer = document.querySelector(".cards-container");
     cardsContainer.innerHTML='';
     for (let i = 4; i <= 20; i += 2) {
         if (i<=20) {
@@ -134,10 +154,9 @@ function restart() {
         }
         cardsContainer.innerHTML += `<li class="card-number limit-cards">${i}</li>`;
     }
+    numberCards = cardsContainer.querySelectorAll('.card-number')
     numberCards.forEach(card => card.addEventListener('click', startGame));
-    document.querySelector(".end-game").classList.add('hide');
-    document.querySelector(".cards-container").classList.remove('hide');
-    document.querySelector(".counter").classList.remove('hide');
+    changeScreen();
 }
 
 function cancel() {
