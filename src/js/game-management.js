@@ -1,5 +1,7 @@
-// Variables to keep track of the currently flipped cards
+// Declare variables
 let firstCard = '', secondCard = '';
+const restartButtom = document.querySelector("#restart-buttom");
+const cancelButtom = document.querySelector("#cancel-buttom");
 
 // Function to toggle the visibility of game screens
 function changeScreen() {
@@ -20,6 +22,9 @@ function restart() {
         cardsContainer.innerHTML += `<li class="card-number limit-cards">${i}</li>`;
     }
 
+    restartButtom.removeEventListener('click', restart);
+    cancelButtom.removeEventListener('click', cancel);
+
     prepareGame();
     changeScreen();
 }
@@ -28,14 +33,17 @@ function restart() {
 function cancel() {
     document.querySelector(".restart").classList.add('hide');
     document.querySelector("#restart-question").classList.add('hide');
+
+    restartButtom.removeEventListener('click', restart);
+    cancelButtom.removeEventListener('click', cancel);
 }
 
 // Function to handle game completion
 function gameCompleted() {
     counter.innerText = "00:00";
 
-    document.querySelector("#restart-buttom").addEventListener('click', restart);
-    document.querySelector("#cancel-buttom").addEventListener('click', cancel);
+    restartButtom.addEventListener('click', restart);
+    cancelButtom.addEventListener('click', cancel);
     let congratulationsMessage = document.querySelector("#result");
 
     if (minutes === 0) {
@@ -82,7 +90,7 @@ function compareCards() {
         managePoints();
         return;
     }
-    
+
     setTimeout(resetCards, 1000);
 }
 
