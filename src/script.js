@@ -1,5 +1,5 @@
-let pointsNeeded, turns, points;
-let firstCard = null, secondCard = null;
+let pointsNeeded, turns, points, seconds, minutes, secondsDisplay, minutesDisplay, intervalId;
+let firstCard = '', secondCard = '';
 
 const numberCards = document.querySelectorAll('.card-number');
 numberCards.forEach(card => card.addEventListener('click', startGame));
@@ -54,6 +54,24 @@ function renderCards(listCards) {
     }
     const cards = document.querySelectorAll('.card');
     cards.forEach(card => card.addEventListener('click', manageGame));
+    startCounter();
+}
+
+function startCounter() {
+    seconds = 0;
+    minutes = 0;
+    intervalId = setInterval(updateCounter, 1000);
+}
+
+function updateCounter() {
+    seconds++;
+    if (seconds === 60) {
+      seconds = 0;
+      minutes++;
+    }
+    minutesDisplay = minutes.toString().padStart(2, "0");
+    secondsDisplay = seconds.toString().padStart(2, "0");
+    document.querySelector("h4").innerText = `${minutesDisplay}:${secondsDisplay}`;
 }
 
 function flipCard(card) {
@@ -61,10 +79,10 @@ function flipCard(card) {
 }
 
 function manageGame() {  
-    if (firstCard !== null && secondCard !== null) {
+    if (firstCard !== '' && secondCard !== '') {
         return;
     }
-    else if (firstCard === null) {
+    else if (firstCard === '') {
         flipCard(this);
         firstCard = this;
         return;
@@ -81,16 +99,14 @@ function manageGame() {
 
 function compareCards() {
     if (firstCard.innerHTML === secondCard.innerHTML) {
-        firstCard = null;
-        secondCard = null;
+        firstCard = secondCard = '';
         managePoints();
         return;
     }
   
     flipCard(firstCard);
     flipCard(secondCard);
-    firstCard = null;
-    secondCard = null;
+    firstCard = secondCard = '';
 }
 
 function managePoints() {

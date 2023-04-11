@@ -1,5 +1,5 @@
 @media (min-width: 1921px) {
-    .stopwatch {
+    .counter {
         right: 22.5%;
     }
 }
@@ -18,13 +18,13 @@
         height: 131px;
     }
 
-    .stopwatch {
+    .counter {
         top: -55px;
     }
 }
 
 @media (max-width: 768px) {
-    .stopwatch {
+    .counter {
         right: 7.5%;
     }
     
@@ -69,7 +69,7 @@
         height: 93px;
     }
 
-    .stopwatch {
+    .counter {
         top: -45px;
     }
 
