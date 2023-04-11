@@ -32,18 +32,17 @@
                     <li class="card-number limit-cards">22</li>
                     <li class="card-number limit-cards">24</li>
                 </ul>
-                <div class="end-game">
+                <div class="end-game hide">
                     <h2>Congratulations!</h2>
-                    <h2>You finished in 10 turns and 00:00</h2>
-                    <h3>Let's play again?</h3>
+                    <h2 id="result">You finished in 10 turns and 00:00</h2>
+                    <h3 id="restart-question">Let's play again?</h3>
                     <div class="restart">
-                        <div class="card-number">Yes</div>
-                        <div class="card-number">No</div>
+                        <div class="card-number" id="restart-buttom">Yes</div>
+                        <div class="card-number" id="cancel-buttom">No</div>
                     </div>
                 </div>
             </div>
         </main>
-        <ul class="cards-container2"></ul>
         <script src="./src/script.js"></script>
     </body>
 </html>

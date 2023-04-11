@@ -6,8 +6,9 @@ numberCards.forEach(card => card.addEventListener('click', startGame));
 
 function startGame() {
     turns = points = 0;
-
     this.classList.toggle('flip-number');
+    numberCards.forEach(card => card.removeEventListener('click', startGame));
+
     const numberPairs = parseInt(this.innerHTML)/2;
     pointsNeeded = numberPairs;
     fetchCards(numberPairs);
@@ -113,8 +114,33 @@ function managePoints() {
     points++;
 
     if (points === pointsNeeded) {
-      alert(
-        `Você ganhou em ${turns} jogadas!`
-      );
+        clearInterval(intervalId);
+        document.querySelector("#result").innerText = `You finished in ${turns} turns and ${minutesDisplay}:${secondsDisplay}`;
+        document.querySelector("#restart-buttom").addEventListener('click', restart);
+        document.querySelector("#cancel-buttom").addEventListener('click', cancel);
+        document.querySelector(".cards-container").classList.add('hide');
+        document.querySelector(".counter").classList.add('hide');
+        document.querySelector(".end-game").classList.remove('hide');
     }
+}
+
+function restart() {
+    const cardsContainer = document.querySelector(".cards-container");
+    cardsContainer.innerHTML='';
+    for (let i = 4; i <= 20; i += 2) {
+        if (i<=20) {
+            cardsContainer.innerHTML += `<li class="card-number">${i}</li>`;
+            continue;
+        }
+        cardsContainer.innerHTML += `<li class="card-number limit-cards">${i}</li>`;
+    }
+    numberCards.forEach(card => card.addEventListener('click', startGame));
+    document.querySelector(".end-game").classList.add('hide');
+    document.querySelector(".cards-container").classList.remove('hide');
+    document.querySelector(".counter").classList.remove('hide');
+}
+
+function cancel() {
+    document.querySelector(".restart").classList.add('hide');
+    document.querySelector("#restart-question").classList.add('hide');
 }

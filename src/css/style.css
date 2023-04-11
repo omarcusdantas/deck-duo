@@ -159,7 +159,10 @@ header {
     text-align: center;
     position: absolute;
     top: 50px;
-    display: none;
+}
+
+.hide {
+    display: none !important;
 }
 
 .restart {
@@ -173,7 +176,7 @@ header {
     animation-name: rotate;
     animation-duration: 1s;
     animation-timing-function: linear;
-    animation-iteration-count: 4;
+    animation-iteration-count: 10;
 }
 
 @keyframes rotate {
