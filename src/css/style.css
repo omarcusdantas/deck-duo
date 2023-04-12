@@ -24,19 +24,18 @@ h1 {
 h2 {
     font-size: 4rem;
     font-weight: 500;
-    color: rgba(172,157,249,1);
-    margin: 50px;
+    color: rgb(61, 61, 61);
 }
 
 h2:first-child {
     font-size: 6rem;
-    color: white;
+    color: #03003A;
 }
 
 h3 {
     font-size: 4rem;
     font-weight: 400;
-    color: rgba(167,167,167,1);
+    color: white;
 }
 
 h4 {
@@ -73,7 +72,7 @@ header {
 }
 
 
-.cards-container {
+.cards-container, .end-game {
     width: 75%;
     max-width: 1440px;
     padding: 35px;
@@ -156,9 +155,11 @@ header {
 }
 
 .end-game {
+    padding: 20px;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
-    position: absolute;
-    top: 50px;
+    gap: 50px;
 }
 
 .hide {
@@ -166,20 +167,19 @@ header {
 }
 
 .restart {
-    margin-top: 40px;
     display: flex;
     justify-content: center;
     gap: 30px;
 }
 
 .flip-number {
-    animation-name: rotate;
+    animation-name: nonstop-flip;
     animation-duration: 1s;
     animation-timing-function: linear;
     animation-iteration-count: 10;
 }
 
-@keyframes rotate {
+@keyframes nonstop-flip {
     from {
         transform: rotateY(0deg);
     }

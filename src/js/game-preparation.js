@@ -28,14 +28,14 @@ function renderCards(listCards) {
     const cardImages = listCards.map(card => card.image);
     cardsContainer.innerHTML='';
 
-    for (let i = 0; i < cardImages.length; i++) {
+    cardImages.forEach(cardImage => {
         cardsContainer.innerHTML += `
             <li class="card">
-                <img class="front-face" src=${cardImages[i]} alt="front of the card">
+                <img class="front-face" src=${cardImage} alt="front of the card">
                 <img class="back-face" src="./src/img/back.png" alt="back of the card">
             </li>
             `;
-    }
+    });
 
     const cards = document.querySelectorAll('.card');
     cards.forEach(card => card.addEventListener('click', manageCards));
