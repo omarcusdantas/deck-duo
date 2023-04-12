@@ -1,29 +1,30 @@
 // Declare variables
-let firstCard = '', secondCard = '';
+let firstCard = "",
+    secondCard = "";
 const restartButtom = document.querySelector("#restart-buttom");
 const cancelButtom = document.querySelector("#cancel-buttom");
 
 // Function to toggle the visibility of game screens
 function changeScreen() {
-    document.querySelector(".counter").classList.toggle('hide');
-    document.querySelector(".end-game").classList.toggle('hide');
-    cardsContainer.classList.toggle('hide');
+    document.querySelector(".counter").classList.toggle("hide");
+    document.querySelector(".end-game").classList.toggle("hide");
+    cardsContainer.classList.toggle("hide");
 }
 
 // Function to restart the game
 function restart() {
-    cardsContainer.innerHTML='';
+    cardsContainer.innerHTML = "";
 
     for (let i = 4; i <= 20; i += 2) {
-        if (i<=20) {
+        if (i <= 20) {
             cardsContainer.innerHTML += `<li class="card-number">${i}</li>`;
             continue;
         }
         cardsContainer.innerHTML += `<li class="card-number limit-cards">${i}</li>`;
     }
 
-    restartButtom.removeEventListener('click', restart);
-    cancelButtom.removeEventListener('click', cancel);
+    restartButtom.removeEventListener("click", restart);
+    cancelButtom.removeEventListener("click", cancel);
 
     prepareGame();
     changeScreen();
@@ -31,27 +32,26 @@ function restart() {
 
 // Function to cancel the restart confirmation
 function cancel() {
-    document.querySelector(".restart").classList.add('hide');
-    document.querySelector("#restart-question").classList.add('hide');
+    document.querySelector(".restart").classList.add("hide");
+    document.querySelector("#restart-question").classList.add("hide");
 
-    restartButtom.removeEventListener('click', restart);
-    cancelButtom.removeEventListener('click', cancel);
+    restartButtom.removeEventListener("click", restart);
+    cancelButtom.removeEventListener("click", cancel);
 }
 
 // Function to handle game completion
 function gameCompleted() {
     counter.innerText = "00:00";
 
-    restartButtom.addEventListener('click', restart);
-    cancelButtom.addEventListener('click', cancel);
+    restartButtom.addEventListener("click", restart);
+    cancelButtom.addEventListener("click", cancel);
     let congratulationsMessage = document.querySelector("#result");
 
     if (minutes === 0) {
         congratulationsMessage.innerText = `You finished in ${seconds} seconds, with ${turns} turns. Well done!`;
         changeScreen();
         return;
-    }
-    else if (minutes === 1) {
+    } else if (minutes === 1) {
         congratulationsMessage.innerText = `You finished in 1 minute and ${seconds} seconds, with ${turns} turns. Well done!`;
         changeScreen();
         return;
@@ -73,20 +73,20 @@ function managePoints() {
 
 // Function to flip a card
 function flipCard(card) {
-    card.classList.toggle('flip');
+    card.classList.toggle("flip");
 }
 
 // Function to reset flipped cards
 function resetCards() {
     flipCard(firstCard);
     flipCard(secondCard);
-    firstCard = secondCard = '';
+    firstCard = secondCard = "";
 }
 
 // Function to compare flipped cards and check for match
 function compareCards() {
     if (firstCard.innerHTML === secondCard.innerHTML) {
-        firstCard = secondCard = '';
+        firstCard = secondCard = "";
         managePoints();
         return;
     }
@@ -95,19 +95,17 @@ function compareCards() {
 }
 
 // Function to handle click on a card
-function manageCards() {  
-    if (firstCard !== '' && secondCard !== '') {
+function manageCards() {
+    if (firstCard !== "" && secondCard !== "") {
         return;
-    }
-    else if (firstCard === '') {
+    } else if (firstCard === "") {
         flipCard(this);
         firstCard = this;
         return;
-    } 
-    else if (firstCard === this) {
+    } else if (firstCard === this) {
         return;
     }
-  
+
     flipCard(this);
     secondCard = this;
     turns++;
