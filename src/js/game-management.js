@@ -15,7 +15,7 @@ function changeScreen() {
 function restart() {
     cardsContainer.innerHTML = "";
 
-    for (let i = 4; i <= 20; i += 2) {
+    for (let i = 4; i <= 24; i += 2) {
         if (i <= 20) {
             cardsContainer.innerHTML += `<li class="card-number">${i}</li>`;
             continue;
