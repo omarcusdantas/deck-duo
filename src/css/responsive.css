@@ -18,6 +18,7 @@
     .back-face {
         width: 85px;
         height: 131px;
+        border-radius: 7px;
     }
 
     .counter {
@@ -73,6 +74,7 @@
     .back-face {
         width: 60px;
         height: 93px;
+        border-radius: 5px;
     }
 
     .counter {
