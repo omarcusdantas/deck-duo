@@ -7,6 +7,7 @@
 html {
     font-size: 62.5%;
     min-height: 100%;
+    user-select: none;
 }
 
 body {
@@ -146,7 +147,6 @@ header {
     transform-style: preserve-3d;
     transform: scale(1);
     box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.3);
-    user-select: none;
     transition: transform 0.5s;
 }
 
@@ -161,10 +161,6 @@ header {
     align-items: center;
     text-align: center;
     gap: 50px;
-}
-
-.hide {
-    display: none !important;
 }
 
 .restart {
@@ -187,4 +183,8 @@ header {
     to {
         transform: rotateY(360deg);
     }
+}
+
+.hide {
+    display: none;
 }

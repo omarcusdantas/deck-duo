@@ -64,10 +64,11 @@ function gameCompleted() {
 // Function to manage points when cards match
 function managePoints() {
     points++;
+    const timeCompleteGame = 1000;
 
     if (points === pointsNeeded) {
         clearInterval(intervalId);
-        setTimeout(gameCompleted, 1000);
+        setTimeout(gameCompleted, timeCompleteGame);
     }
 }
 
@@ -91,7 +92,8 @@ function compareCards() {
         return;
     }
 
-    setTimeout(resetCards, 1000);
+    const timeResetCards = 1000;
+    setTimeout(resetCards, timeResetCards);
 }
 
 // Function to handle click on a card

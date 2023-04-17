@@ -20,8 +20,9 @@ function updateCounter() {
         minutes++;
     }
 
-    minutesDisplay = minutes.toString().padStart(2, "0");
-    secondsDisplay = seconds.toString().padStart(2, "0");
+    const displayFormatNumbers = 2;
+    minutesDisplay = minutes.toString().padStart(displayFormatNumbers, "0");
+    secondsDisplay = seconds.toString().padStart(displayFormatNumbers, "0");
     counter.innerText = `${minutesDisplay}:${secondsDisplay}`;
 }
 
