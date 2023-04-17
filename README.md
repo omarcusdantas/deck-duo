@@ -1,6 +1,4 @@
 # [Deck Duo](https://omarcusdantas.github.io/deck-duo/)
-<img style="width:400px" src="https://drive.google.com/uc?export=view&id=1L1WtpYsD0gAEGduYlf4E4eMlrkA8vPxx">
-
 A web-based memory card game called "Deck Duo" where players match pairs of cards to win the game.
 
 ## Description
