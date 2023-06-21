@@ -17,7 +17,7 @@
         <main>
             <div class="game-container">
                 <div class="counter">
-                    <h4>00:00</h4>
+                    <h4 id="timer">00:00</h4>
                 </div>
                 <ul class="cards-container">
                     <li class="instruction">
@@ -37,11 +37,11 @@
                 </ul>
                 <div class="end-game hide">
                     <h2>Congratulations!</h2>
-                    <h2 id="result">You finished in 10 turns and 00:00</h2>
+                    <h2 id="result"></h2>
                     <h3 id="restart-question">Let's play again?</h3>
                     <div class="restart">
-                        <div class="card-number" id="restart-buttom">Yes</div>
-                        <div class="card-number" id="cancel-buttom">No</div>
+                        <div class="end-button" id="restart-buttom">Yes</div>
+                        <div class="end-button" id="cancel-buttom">No</div>
                     </div>
                 </div>
             </div>

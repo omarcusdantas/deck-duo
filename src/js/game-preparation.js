@@ -9,7 +9,9 @@ let numberCards,
     minutesDisplay,
     intervalId;
 const cardsContainer = document.querySelector(".cards-container");
-const counter = document.querySelector("h4");
+const counter = document.querySelector("#timer");
+const restartButtom = document.querySelector("#restart-buttom");
+const cancelButtom = document.querySelector("#cancel-buttom");
 
 // Function to update the counter for time tracking
 function updateCounter() {
@@ -37,14 +39,14 @@ function renderCards(listCards) {
     const cardImages = listCards.map((card) => card.image);
     cardsContainer.innerHTML = "";
 
-    cardImages.forEach((cardImage) => {
-        cardsContainer.innerHTML += `
-            <li class="card">
-                <img class="front-face" src=${cardImage} alt="front of the card">
-                <img class="back-face" src="./src/img/back.png" alt="back of the card">
-            </li>
-            `;
-    });
+    const cardHTML = cardImages.map((cardImage) => `
+        <li class="card">
+            <img class="front-face" src="${cardImage}" alt="front of the card">
+            <img class="back-face" src="./src/img/back.png" alt="back of the card">
+        </li>`)
+        .join('');
+
+    cardsContainer.innerHTML = cardHTML;
 
     const cards = document.querySelectorAll(".card");
     cards.forEach((card) => card.addEventListener("click", manageCards));
@@ -80,13 +82,14 @@ async function fetchCards(numberPairs) {
 
         createPairs(cards);
     } catch (error) {
-        console.error(error);
+        alert(error);
     }
 }
 
 // Function to start the game
 function startGame() {
-    turns = points = 0;
+    turns = 0;
+    points = 0;
     this.classList.toggle("flip-number");
 
     const numberPairs = parseInt(this.innerHTML) / 2;
@@ -98,6 +101,8 @@ function startGame() {
 function prepareGame() {
     numberCards = cardsContainer.querySelectorAll(".card-number");
     numberCards.forEach((card) => card.addEventListener("click", startGame));
+    restartButtom.addEventListener("click", restart);
+    cancelButtom.addEventListener("click", cancel);
 }
 
 // Function to initialize the game on page load

@@ -131,7 +131,7 @@ header {
     margin: 10px;
 }
 
-.card-number {
+.card-number, .end-button {
     width: 85px;
     height: 120px;
     font-size: 4.5rem;
@@ -150,7 +150,7 @@ header {
     transition: transform 0.5s;
 }
 
-.card-number:active {
+.card-number:active, .end-button:active {
     transform: scale(0.97);
     transition: transform 0.2s;
 }
