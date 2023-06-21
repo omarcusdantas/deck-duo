@@ -1,6 +1,6 @@
 // Declare variables
-let firstCard = "";
-let secondCard = "";
+let firstCard = null;
+let secondCard = null;
 
 // Function to toggle the visibility of game screens
 function changeScreen() {
@@ -77,13 +77,17 @@ function flipCard(card) {
 function resetCards() {
     flipCard(firstCard);
     flipCard(secondCard);
-    firstCard = secondCard = "";
+    firstCard = null;
+    secondCard = null;
 }
 
 // Function to compare flipped cards and check for match
 function compareCards() {
     if (firstCard.innerHTML === secondCard.innerHTML) {
-        firstCard = secondCard = "";
+        firstCard.removeEventListener("click", manageCards);
+        secondCard.removeEventListener("click", manageCards);
+        firstCard = null
+        secondCard = null;
         managePoints();
         return;
     }
@@ -94,18 +98,21 @@ function compareCards() {
 
 // Function to handle click on a card
 function manageCards() {
-    if (firstCard !== "" && secondCard !== "") {
-        return;
-    } else if (firstCard === "") {
-        flipCard(this);
-        firstCard = this;
-        return;
-    } else if (firstCard === this) {
+    if (firstCard !== null && secondCard !== null) {
         return;
     }
 
-    flipCard(this);
-    secondCard = this;
-    turns++;
-    compareCards();
+    else if(firstCard === null) {
+        console.log("oi");
+        firstCard = this;
+        flipCard(this);
+        return;
+    }
+
+    else if(secondCard === null && this !== firstCard) {
+        secondCard = this;
+        flipCard(this);
+        compareCards();
+        return;
+    }
 }

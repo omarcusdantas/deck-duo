@@ -98,11 +98,6 @@ header {
     transform: scale(1);
 }
 
-.card:active {
-    transform: scale(0.97);
-    transition: transform 0.2s;
-}
-
 .front-face,
 .back-face {
     width: 120px;
@@ -111,6 +106,11 @@ header {
     top: 0;
     backface-visibility: hidden;
     border-radius: 9px;
+}
+
+.back-face:active {
+    transform: scale(0.97);
+    transition: transform 0.2s;
 }
 
 .front-face {
