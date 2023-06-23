@@ -45,6 +45,10 @@ h4 {
     font-weight: 500;
 }
 
+a {
+    text-decoration: none;
+}
+
 header {
     width: 100%;
     margin: 40px 0;
@@ -96,6 +100,7 @@ header {
     transform-style: preserve-3d;
     transition: transform 0.5s;
     transform: scale(1);
+    cursor: pointer;
 }
 
 .front-face,
@@ -148,6 +153,7 @@ header {
     transform: scale(1);
     box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.3);
     transition: transform 0.5s;
+    cursor: pointer;
 }
 
 .card-number:active, .end-button:active {

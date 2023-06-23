@@ -14,17 +14,20 @@ function restart() {
     cardsContainer.innerHTML = "";
 
     for (let i = 4; i <= 24; i += 2) {
-        const cardNumberElement = document.createElement('li');
-        cardNumberElement.classList.add('card-number');
+        const cardNumberElement = document.createElement("button");
+        cardNumberElement.classList.add("card-number");
         
         if (i > 20) {
-            cardNumberElement.classList.add('limit-cards');
+            cardNumberElement.classList.add("limit-cards");
         }
         
         const cardNumberText = document.createTextNode(i);
         cardNumberElement.appendChild(cardNumberText);
         
-        cardsContainer.appendChild(cardNumberElement);
+        const listItemElement = document.createElement("li");
+        listItemElement.appendChild(cardNumberElement);
+    
+        cardsContainer.appendChild(listItemElement);
     }
 
     prepareGame();
@@ -103,7 +106,6 @@ function manageCards() {
     }
 
     else if(firstCard === null) {
-        console.log("oi");
         firstCard = this;
         flipCard(this);
         return;

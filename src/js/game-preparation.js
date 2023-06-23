@@ -40,7 +40,7 @@ function renderCards(listCards) {
     cardsContainer.innerHTML = "";
 
     const cardHTML = cardImages.map((cardImage) => `
-        <li class="card">
+        <li tabindex="0" role="button" class="card">
             <img class="front-face" src="${cardImage}" alt="front of the card">
             <img class="back-face" src="./src/img/back.png" alt="back of the card">
         </li>`)
