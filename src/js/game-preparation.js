@@ -1,5 +1,4 @@
-// Declare variables
-let numberCards,
+let numberOfCardsChoice,
     pointsNeeded,
     turns,
     points,
@@ -10,10 +9,7 @@ let numberCards,
     intervalId;
 const cardsContainer = document.querySelector(".cards-container");
 const counter = document.querySelector("#timer");
-const restartButtom = document.querySelector("#restart-buttom");
-const cancelButtom = document.querySelector("#cancel-buttom");
 
-// Function to update the counter for time tracking
 function updateCounter() {
     seconds++;
 
@@ -22,63 +18,59 @@ function updateCounter() {
         minutes++;
     }
 
-    const displayFormatNumbers = 2;
-    minutesDisplay = minutes.toString().padStart(displayFormatNumbers, "0");
-    secondsDisplay = seconds.toString().padStart(displayFormatNumbers, "0");
+    const displayWidth = 2;
+    minutesDisplay = minutes.toString().padStart(displayWidth, "0");
+    secondsDisplay = seconds.toString().padStart(displayWidth, "0");
     counter.innerText = `${minutesDisplay}:${secondsDisplay}`;
 }
 
-// Function to start the counter for time tracking
 function startCounter() {
     seconds = minutes = 0;
     intervalId = setInterval(updateCounter, 1000);
 }
 
-// Function to render the cards on the page
-function renderCards(listCards) {
-    const cardImages = listCards.map((card) => card.image);
+function renderCards(cards) {
+    const cardsImages = cards.map((card) => card.image);
     cardsContainer.innerHTML = "";
 
-    const cardHTML = cardImages.map((cardImage) => `
+    const cardsHTML = cardsImages.map(
+        (cardImage) => `
         <li tabindex="0" role="button" class="card">
             <img class="front-face" src="${cardImage}" alt="front of the card">
             <img class="back-face" src="./src/img/back.png" alt="back of the card">
-        </li>`)
-        .join('');
+        </li>`
+    );
 
-    cardsContainer.innerHTML = cardHTML;
+    cardsContainer.innerHTML = cardsHTML.join("");
 
-    const cards = document.querySelectorAll(".card");
-    cards.forEach((card) => card.addEventListener("click", manageCards));
+    const renderedCards = document.querySelectorAll(".card");
+    renderedCards.forEach((card) => card.addEventListener("click", manageCards));
     startCounter();
 }
 
-// Function for random shuffling of cards
 function randomShuffle() {
     return Math.random() - 0.5;
 }
 
-// Function to create pairs of cards and shuffle them
 function createPairs(cards) {
-    const listCards = cards.concat(cards);
-    listCards.sort(randomShuffle);
-    renderCards(listCards);
+    const duplicatedCards = cards.concat(cards);
+    duplicatedCards.sort(randomShuffle);
+    renderCards(duplicatedCards);
 }
 
-// Function to fetch cards from Deck of Cards API
-async function fetchCards(numberPairs) {
+async function fetchCards(numberOfPairs) {
     try {
-        const response1 = await fetch(
+        const newDeckRequest = await fetch(
             "https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1"
         );
-        const data1 = await response1.json();
-        const deckId = data1.deck_id;
+        const newDeck = await newDeckRequest.json();
+        const deckId = newDeck.deck_id;
 
-        const response2 = await fetch(
-            `https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=${numberPairs}`
+        const drawRequest = await fetch(
+            `https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=${numberOfPairs}`
         );
-        const data2 = await response2.json();
-        const cards = data2.cards;
+        const drawnCards = await drawRequest.json();
+        const cards = drawnCards.cards;
 
         createPairs(cards);
     } catch (error) {
@@ -86,26 +78,20 @@ async function fetchCards(numberPairs) {
     }
 }
 
-// Function to start the game
 function startGame() {
-    turns = 0;
-    points = 0;
+    turns = points = 0;
     this.classList.toggle("flip-number");
 
-    const numberPairs = parseInt(this.innerHTML) / 2;
-    pointsNeeded = numberPairs;
-    fetchCards(numberPairs);
+    const numberOfPairs = parseInt(this.innerHTML) / 2;
+    pointsNeeded = numberOfPairs;
+    fetchCards(numberOfPairs);
 }
 
-// Function to prepare the game
 function prepareGame() {
-    numberCards = cardsContainer.querySelectorAll(".card-number");
-    numberCards.forEach((card) => card.addEventListener("click", startGame));
-    restartButtom.addEventListener("click", restart);
-    cancelButtom.addEventListener("click", cancel);
+    numberOfCardsChoice = cardsContainer.querySelectorAll(".card-number");
+    numberOfCardsChoice.forEach((card) => card.addEventListener("click", startGame));
 }
 
-// Function to initialize the game on page load
 window.onload = function () {
     prepareGame();
 };

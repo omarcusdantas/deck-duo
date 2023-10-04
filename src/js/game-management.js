@@ -1,32 +1,33 @@
-// Declare variables
 let firstCard = null;
 let secondCard = null;
+const restartButtom = document.querySelector("#restart-buttom");
+const cancelButtom = document.querySelector("#cancel-buttom");
 
-// Function to toggle the visibility of game screens
 function changeScreen() {
     document.querySelector(".counter").classList.toggle("hide");
     document.querySelector(".end-game").classList.toggle("hide");
     cardsContainer.classList.toggle("hide");
 }
 
-// Function to restart the game
-function restart() {
+function restartGame() {
     cardsContainer.innerHTML = "";
 
-    for (let i = 4; i <= 24; i += 2) {
-        const cardNumberElement = document.createElement("button");
-        cardNumberElement.classList.add("card-number");
-        
-        if (i > 20) {
-            cardNumberElement.classList.add("limit-cards");
+    const minNumberOfCards = 4;
+    const maxNumberOfCards = 24;
+    const maxNumberOfCardsForSmallScreens = 20;
+
+    for (let i = minNumberOfCards; i <= maxNumberOfCards; i += 2) {
+        const choiceOfCardsElement = document.createElement("button");
+        choiceOfCardsElement.classList.add("card-number");
+
+        if (i > maxNumberOfCardsForSmallScreens) {
+            choiceOfCardsElement.classList.add("limit-cards");
         }
-        
-        const cardNumberText = document.createTextNode(i);
-        cardNumberElement.appendChild(cardNumberText);
-        
+
+        choiceOfCardsElement.textContent = `${i}`;
+
         const listItemElement = document.createElement("li");
-        listItemElement.appendChild(cardNumberElement);
-    
+        listItemElement.appendChild(choiceOfCardsElement);
         cardsContainer.appendChild(listItemElement);
     }
 
@@ -34,84 +35,75 @@ function restart() {
     changeScreen();
 }
 
-// Function to cancel the restart confirmation
-function cancel() {
+function cancelRestart() {
     document.querySelector(".restart").classList.add("hide");
     document.querySelector("#restart-question").classList.add("hide");
 }
 
-// Function to handle game completion
 function gameCompleted() {
     counter.innerText = "00:00";
 
-    let congratulationsMessage = document.querySelector("#result");
+    restartButtom.addEventListener("click", restartGame);
+    cancelButtom.addEventListener("click", cancelRestart);
+
+    let congratulationMessage = document.querySelector("#result");
 
     if (minutes === 0) {
-        congratulationsMessage.innerText = `You finished in ${seconds} seconds, with ${turns} turns. Well done!`;
+        congratulationMessage.innerText = `You finished in ${seconds} seconds, with ${turns} turns. Well done!`;
         changeScreen();
         return;
     } else if (minutes === 1) {
-        congratulationsMessage.innerText = `You finished in 1 minute and ${seconds} seconds, with ${turns} turns. Well done!`;
+        congratulationMessage.innerText = `You finished in 1 minute and ${seconds} seconds, with ${turns} turns. Well done!`;
         changeScreen();
         return;
     }
-
-    congratulationsMessage.innerText = `You finished in ${minutes} minutes and ${seconds} seconds, with ${turns} turns. Well done!`;
+    congratulationMessage.innerText = `You finished in ${minutes} minutes and ${seconds} seconds, with ${turns} turns. Well done!`;
     changeScreen();
 }
 
-// Function to manage points when cards match
 function managePoints() {
     points++;
-    const timeCompleteGame = 1000;
+    const waitTimeToCompleteGameInMs = 1000;
 
     if (points === pointsNeeded) {
         clearInterval(intervalId);
-        setTimeout(gameCompleted, timeCompleteGame);
+        setTimeout(gameCompleted, waitTimeToCompleteGameInMs);
     }
 }
 
-// Function to flip a card
 function flipCard(card) {
     card.classList.toggle("flip");
 }
 
-// Function to reset flipped cards
 function resetCards() {
     flipCard(firstCard);
     flipCard(secondCard);
-    firstCard = null;
-    secondCard = null;
+    firstCard = secondCard = null;
 }
 
-// Function to compare flipped cards and check for match
 function compareCards() {
+    turns ++;
+
     if (firstCard.innerHTML === secondCard.innerHTML) {
         firstCard.removeEventListener("click", manageCards);
         secondCard.removeEventListener("click", manageCards);
-        firstCard = null
-        secondCard = null;
+        firstCard = secondCard = null;
         managePoints();
         return;
     }
 
-    const timeResetCards = 1000;
-    setTimeout(resetCards, timeResetCards);
+    const timeToResetCardsInMs = 1000;
+    setTimeout(resetCards, timeToResetCardsInMs);
 }
 
-// Function to handle click on a card
 function manageCards() {
     if (firstCard !== null && secondCard !== null) {
         return;
-    }
-
-    else if(firstCard === null) {
+    } else if (firstCard === null) {
         firstCard = this;
         flipCard(this);
         return;
-    }
-
-    else if(secondCard === null && this !== firstCard) {
+    } else if (secondCard === null && this !== firstCard) {
         secondCard = this;
         flipCard(this);
         compareCards();
