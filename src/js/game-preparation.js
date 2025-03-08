@@ -48,13 +48,13 @@ function renderCards(cards) {
     startCounter();
 }
 
-function randomShuffle() {
+function randomSortComparator() {
     return Math.random() - 0.5;
 }
 
 function createPairs(cards) {
     const duplicatedCards = cards.concat(cards);
-    duplicatedCards.sort(randomShuffle);
+    duplicatedCards.sort(randomSortComparator);
     renderCards(duplicatedCards);
 }
 
