@@ -80,9 +80,10 @@ async function fetchCards(numberOfPairs) {
 
 function startGame() {
     turns = points = 0;
-    this.classList.toggle("flip-number");
+    const chosenCard = this;
+    chosenCard.classList.toggle("flip-number");
 
-    const numberOfPairs = parseInt(this.innerHTML) / 2;
+    const numberOfPairs = parseInt(chosenCard.innerHTML) / 2;
     pointsNeeded = numberOfPairs;
     fetchCards(numberOfPairs);
 }
